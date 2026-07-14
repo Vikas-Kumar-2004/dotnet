@@ -3,5 +3,6 @@
   <Project Path="ASPCoreWebAPICRUD/ASPCoreWebAPICRUD.csproj" Id="bf1ac586-217e-4da8-a18b-c878a98c930f" />
   <Project Path="CQRSMediatorPattern/CQRSMediatorPattern.csproj" Id="a1264980-f851-4c0a-b531-2da3c80bc38a" />
   <Project Path="EntityRestAPI/EntityRestAPI.csproj" Id="f9f0e5c2-c2c5-473f-a18f-dc9f07ee2512" />
+  <Project Path="NZWalks-ASP.NET Core/NZWalks-ASP.NET Core.csproj" Id="2ba89bfd-3722-4103-8b93-b9369b842577" />
   <Project Path="WebMinimalExample/WebMinimalExample.csproj" Id="69b623aa-2dd1-49a4-8a88-73abc281d4e4" />
 </Solution>
