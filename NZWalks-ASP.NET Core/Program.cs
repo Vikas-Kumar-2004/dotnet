@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using NZWalks_ASP.NET_Core.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Registers MVC Controller services into the Dependency Injection (DI) container.
 // Required if your application uses Controllers to handle HTTP requests.
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// PostgreSQL Connection
+builder.Services.AddDbContext<NZWalksDbContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
 
 // Registers OpenAPI (Swagger) services.
 // This generates API documentation that describes all available endpoints.
@@ -27,6 +38,8 @@ if (app.Environment.IsDevelopment())
     // Exposes the OpenAPI specification endpoint.
     // This allows tools like Swagger UI to display API documentation.
     app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 // Redirects all HTTP requests to HTTPS automatically.
