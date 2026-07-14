@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Documents\\DOTNET\\ASPCoreWebAPICRUD\\ASPCoreWebAPICRUD.csproj": {}
+    "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPICRUD\\ASPCoreWebAPICRUD.csproj": {}
   },
   "projects": {
-    "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Documents\\DOTNET\\ASPCoreWebAPICRUD\\ASPCoreWebAPICRUD.csproj": {
+    "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPICRUD\\ASPCoreWebAPICRUD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Documents\\DOTNET\\ASPCoreWebAPICRUD\\ASPCoreWebAPICRUD.csproj",
+        "projectUniqueName": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPICRUD\\ASPCoreWebAPICRUD.csproj",
         "projectName": "ASPCoreWebAPICRUD",
-        "projectPath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Documents\\DOTNET\\ASPCoreWebAPICRUD\\ASPCoreWebAPICRUD.csproj",
+        "projectPath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPICRUD\\ASPCoreWebAPICRUD.csproj",
         "packagesPath": "C:\\Users\\VikasKumar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Documents\\DOTNET\\ASPCoreWebAPICRUD\\obj\\",
+        "outputPath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPICRUD\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

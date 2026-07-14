@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ASPCoreWebAPi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53628e99442accb36f2dcc4def95126dcebaa065")]
 [assembly: System.Reflection.AssemblyProductAttribute("ASPCoreWebAPi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ASPCoreWebAPi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

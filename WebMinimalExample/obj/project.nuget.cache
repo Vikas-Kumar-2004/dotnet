@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rU25P8PG6RM=",
+  "dgSpecHash": "cakgb8WzFxI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Documents\\DOTNET\\WebMinimalExample\\WebMinimalExample.csproj",
+  "projectFilePath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\WebMinimalExample\\WebMinimalExample.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\VikasKumar\\.nuget\\packages\\automapper\\16.1.1\\automapper.16.1.1.nupkg.sha512",
     "C:\\Users\\VikasKumar\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
@@ -42,13 +42,16 @@
   ],
   "logs": [
     {
-      "code": "NU1900",
+      "code": "NU1903",
       "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://nuget.pkg.github.com/deliverit-uharvest/index.json.",
-      "projectPath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Documents\\DOTNET\\WebMinimalExample\\WebMinimalExample.csproj",
+      "message": "Package 'Microsoft.OpenApi' 2.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-v5pm-xwqc-g5wc",
+      "projectPath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\WebMinimalExample\\WebMinimalExample.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Documents\\DOTNET\\WebMinimalExample\\WebMinimalExample.csproj",
-      "targetGraphs": []
+      "filePath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\WebMinimalExample\\WebMinimalExample.csproj",
+      "libraryId": "Microsoft.OpenApi",
+      "targetGraphs": [
+        "net10.0"
+      ]
     }
   ]
 }
