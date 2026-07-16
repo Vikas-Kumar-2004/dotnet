@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CQRSMediatorPattern")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4074788fe5ec080fd556bc3ac18a3bf54c20cf7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d962c4cd8a63e89515fd6ff4d430e787eacfe644")]
 [assembly: System.Reflection.AssemblyProductAttribute("CQRSMediatorPattern")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CQRSMediatorPattern")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

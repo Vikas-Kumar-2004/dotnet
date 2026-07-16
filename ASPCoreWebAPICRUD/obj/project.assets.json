@@ -3364,9 +3364,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPICRUD\\ASPCoreWebAPICRUD.csproj",
-      "projectName": "ASPCoreWebAPICRUD",
-      "projectPath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPICRUD\\ASPCoreWebAPICRUD.csproj",
+      "projectUniqueName": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPICRUD\\ASPCoreWebAPICRUD-2.csproj",
+      "projectName": "ASPCoreWebAPICRUD-2",
+      "projectPath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPICRUD\\ASPCoreWebAPICRUD-2.csproj",
       "packagesPath": "C:\\Users\\VikasKumar\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPICRUD\\obj\\",
       "projectStyle": "PackageReference",
@@ -3449,19 +3449,19 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.28, 8.0.28]"
+            "version": "[8.0.29, 8.0.29]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[8.0.28, 8.0.28]"
+            "version": "[8.0.29, 8.0.29]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.28, 8.0.28]"
+            "version": "[8.0.29, 8.0.29]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[8.0.28, 8.0.28]"
+            "version": "[8.0.29, 8.0.29]"
           }
         ],
         "frameworkReferences": {
@@ -3472,7 +3472,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -453,9 +453,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPi\\ASPCoreWebAPi.csproj",
-      "projectName": "ASPCoreWebAPi",
-      "projectPath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPi\\ASPCoreWebAPi.csproj",
+      "projectUniqueName": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPi\\ASPCoreWebAPI-1.csproj",
+      "projectName": "ASPCoreWebAPI-1",
+      "projectPath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPi\\ASPCoreWebAPI-1.csproj",
       "packagesPath": "C:\\Users\\VikasKumar\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\VikasKumar\\OneDrive - ORGANICUT FRESH PRIVATE LIMITED\\Vikas\\DOTNET\\ASPCoreWebAPi\\obj\\",
       "projectStyle": "PackageReference",
@@ -518,19 +518,19 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.28, 8.0.28]"
+            "version": "[8.0.29, 8.0.29]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[8.0.28, 8.0.28]"
+            "version": "[8.0.29, 8.0.29]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.28, 8.0.28]"
+            "version": "[8.0.29, 8.0.29]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[8.0.28, 8.0.28]"
+            "version": "[8.0.29, 8.0.29]"
           }
         ],
         "frameworkReferences": {
@@ -541,7 +541,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
