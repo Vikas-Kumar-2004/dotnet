@@ -4,7 +4,6 @@ using NZWalks_ASP.NET_Core.Data;
 using NZWalks_ASP.NET_Core.Models.Domain;
 using NZWalks_ASP.NET_Core.Models.DTO;
 using Microsoft.EntityFrameworkCore;
-using NZWalks_ASP.NET_Core.Repositories;
 
 namespace NZWalks_ASP.NET_Core.Controllers
 {
@@ -14,12 +13,10 @@ namespace NZWalks_ASP.NET_Core.Controllers
     public class RegionsController : ControllerBase
     {
         private readonly NZWalksDbContext dbContext;
-        private readonly IRegionRepository regionRepository;
 
-        public RegionsController(NZWalksDbContext dbContext, IRegionRepository regionRepository)
+        public RegionsController(NZWalksDbContext dbContext)
         {
             this.dbContext = dbContext;
-            this.regionRepository = regionRepository;
         }
 
         // GET ALL  REGION (Get All Region )
