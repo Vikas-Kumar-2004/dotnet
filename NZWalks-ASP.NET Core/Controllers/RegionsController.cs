@@ -26,7 +26,9 @@ namespace NZWalks_ASP.NET_Core.Controllers
         public async Task<IActionResult> GetAll()
         {
             // Get data from the database (Domain Models)
-            var regionsDomain = await dbContext.Regions.ToListAsync();
+            var regionsDomain = await dbContext.Regions.ToListAsync(); // With Entity Framework
+
+            // Without Entitiy Framework we have to write a raw sql query :SELECT * FROM Regions;
 
             // Map Domain Models to DTOs
             // Never return Domain Models directly to the client.
@@ -216,6 +218,202 @@ Now the return type is: Task<IActionResult>
 
 This means: "This method will eventually return an IActionResult, but it may need to wait for an asynchronous operation to complete first."
  
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Entity Framework (more commonly **Entity Framework Core** or **EF Core**) is **not** a controller, a function, or a design pattern.
+
+It is an **ORM (Object-Relational Mapper)**.
+
+Its job is to **convert C# objects into database records and database records into C# objects**.
+
+Without an ORM, you write SQL manually. : SELECT * FROM Products;
+
+With an ORM, you work with C# objects, and the ORM generates the SQL for you. Eg; var products = await dbContext.Products.ToListAsync();
+
+
+and converts the results into a list of `Product` objects.
+
+
+
+
+
+    ---
+
+    # DbContext
+
+    The main class in EF Core is `DbContext`.
+
+    ```csharp
+    public class AppDbContext : DbContext
+    {
+        public DbSet<Product> Products { get; set; }
+    }
+    ```
+
+    Think of `DbContext` as your application's connection to the database.
+
+    ---
+
+# Insert Data
+
+Instead of SQL:
+
+```sql
+INSERT INTO Products(Name, Price)
+VALUES ('Laptop', 50000);
+```
+
+You write:
+
+```csharp
+var product = new Product
+{
+    Name = "Laptop",
+    Price = 50000
+};
+
+dbContext.Products.Add(product);
+await dbContext.SaveChangesAsync();
+```
+
+EF Core generates the `INSERT` statement automatically.
+
+---
+
+# Read Data
+
+Instead of:
+
+```sql
+SELECT * FROM Products;
+```
+
+You write:
+
+```csharp
+var products = await dbContext.Products.ToListAsync();
+```
+
+---
+
+# Update Data
+
+Instead of:
+
+```sql
+UPDATE Products
+SET Price = 60000
+WHERE Id = 1;
+```
+
+You write:
+
+```csharp
+var product = await dbContext.Products.FindAsync(1);
+
+product.Price = 60000;
+
+await dbContext.SaveChangesAsync();
+```
+
+EF Core generates the `UPDATE` statement.
+
+---
+
+# Delete Data
+
+Instead of:
+
+```sql
+DELETE FROM Products
+WHERE Id = 1;
+```
+
+You write:
+
+```csharp
+var product = await dbContext.Products.FindAsync(1);
+
+dbContext.Products.Remove(product);
+
+await dbContext.SaveChangesAsync();
+```
+
+---
+
+# How does it fit into an ASP.NET Core application?
+
+```text
+User
+   │
+HTTP Request
+   │
+Controller
+   │
+Service / CQRS Handler
+   │
+Entity Framework Core (DbContext)
+   │
+SQL Database
+```
+
+Notice that **Entity Framework is below the Controller**.
+
+The controller never talks directly to the database. It usually calls a service or CQRS handler, which uses `DbContext` to access the database.
+
+---
+
+# Real-life analogy
+
+Imagine a restaurant:
+
+```text
+Customer
+     │
+     ▼
+Waiter (Controller)
+     │
+     ▼
+Chef (Service / Handler)
+     │
+     ▼
+Translator (Entity Framework)
+     │
+     ▼
+Kitchen (Database)
+```
+
+* The **Controller** receives the request.
+* The **Service/Handler** decides what should happen.
+* **Entity Framework** translates C# operations into SQL.
+* The **Database** stores the data.
+
+---
+
+# Is Entity Framework a design pattern?
+
+**No.**
+
+It is an **ORM framework** developed by Microsoft.
+
+---
+
+# Summary
+
+| Term                        | What is it?            | Purpose                                                       |
+| --------------------------- | ---------------------- | ------------------------------------------------------------- |
+| **Controller**              | ASP.NET Core component | Receives HTTP requests and returns responses                  |
+| **Entity**                  | C# class               | Represents a database table                                   |
+| **DbContext**               | EF Core class          | Manages the database connection and tracks entities           |
+| **Entity Framework Core**   | ORM framework          | Converts C# objects to SQL and SQL results back to C# objects |
+| **SQL Server / PostgreSQL** | Database               | Stores the actual data                                        |
+
+### One sentence to remember
+
+> **Entity Framework Core is an ORM that lets you work with your database using C# objects instead of writing SQL for every operation.**
+
  
  
  

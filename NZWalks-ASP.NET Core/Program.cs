@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NZWalks_ASP.NET_Core.Data;
-using NZWalks_ASP.NET_Core.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +21,6 @@ builder.Services.AddDbContext<NZWalksDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
-builder.Services.AddScoped<IRegionRepository, SqlRegionRepository>();// interface with imleentation
 
 
 
