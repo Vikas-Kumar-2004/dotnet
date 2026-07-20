@@ -4,12 +4,14 @@ using NZWalks_ASP.NET_Core.Data;
 using NZWalks_ASP.NET_Core.Models.Domain;
 using NZWalks_ASP.NET_Core.Models.DTO;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NZWalks_ASP.NET_Core.Controllers
 {
     // https:localhost:1234/api/
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RegionsController : ControllerBase
     {
         private readonly NZWalksDbContext dbContext;
@@ -81,6 +83,7 @@ namespace NZWalks_ASP.NET_Core.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AddRegionRequestDto addRegionRequestDto)
         {
+
             // Map DTO to Domain Model
             var regionDomainModel = new Region
             {

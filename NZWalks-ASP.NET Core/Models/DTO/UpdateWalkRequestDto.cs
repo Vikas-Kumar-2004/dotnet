@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NZWalks_ASP.NET_Core.Models.DTO
 {
-    public class AddWalkRequestDto
+    public class UpdateWalkRequestDto
     {
         [Required]
         [MaxLength(100, ErrorMessage = "Name has to be a maximum of 100 characters")]
@@ -19,9 +19,9 @@ namespace NZWalks_ASP.NET_Core.Models.DTO
         public string? WalkImageUrl { get; set; }
 
         [Required]
-        public Guid DifficultyId { get; set; }//  Foreign Key
+        public Guid DifficultyId { get; set; }
 
         [Required]
-        public Guid RegionId { get; set; } //  // A Walk always belongs to one Region
+        public Guid RegionId { get; set; }
     }
 }

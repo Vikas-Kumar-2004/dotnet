@@ -12,5 +12,6 @@ namespace NZWalks_ASP.NET_Core.Models.DTO
         // Navigation properties
         public RegionDto Region { get; set; }
         public DifficultyDto Difficulty { get; set; }
+
     }
 }

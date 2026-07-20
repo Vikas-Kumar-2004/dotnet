@@ -1,7 +1,11 @@
 using Microsoft.AspNetCore.Builder;
+using Scalar.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NZWalks_ASP.NET_Core.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,15 +22,37 @@ builder.Services.AddSwaggerGen();
 // PostgreSQL Connection
 builder.Services.AddDbContext<NZWalksDbContext>(options =>
     options.UseNpgsql(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
+        builder.Configuration.GetConnectionString("NZWalksConnectionString")));
 
-
+builder.Services.AddDbContext<NZWalksAuthDbContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("NZWalksAuthConnectionString")));
 
 
 
 // Registers OpenAPI (Swagger) services.
 // This generates API documentation that describes all available endpoints.
 builder.Services.AddOpenApi();
+
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)
+            )
+        };
+    });
 
 // Builds the application.
 // After this point, all registered services are ready to be used.
@@ -41,11 +67,14 @@ if (app.Environment.IsDevelopment())
     // This allows tools like Swagger UI to display API documentation.
     app.MapOpenApi();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.MapScalarApiReference();
 }
 
 // Redirects all HTTP requests to HTTPS automatically.
 app.UseHttpsRedirection();
+
+
+app.UseAuthentication();
 
 // Adds Authorization middleware.
 // It checks whether the current user is authorized to access protected endpoints.
