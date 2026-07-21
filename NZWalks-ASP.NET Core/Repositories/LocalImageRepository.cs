@@ -1,4 +1,4 @@
-﻿using NZWalks_ASP.NET_Core.Models.Domain;
+using NZWalks_ASP.NET_Core.Models.Domain;
 using NZWalks_ASP.NET_Core.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -23,8 +23,13 @@ namespace NZWalks_ASP.NET_Core.Repositories
 
         public async Task<Image> Upload(Image image)
         {
-            var localFilePath = Path.Combine(webHostEnvironment.ContentRootPath, "Images",
-                $"{image.FileName}{image.FileExtension}");
+            var imagesFolderPath = Path.Combine(webHostEnvironment.ContentRootPath, "Images");
+            if (!Directory.Exists(imagesFolderPath))
+            {
+                Directory.CreateDirectory(imagesFolderPath);
+            }
+
+            var localFilePath = Path.Combine(imagesFolderPath, $"{image.FileName}{image.FileExtension}");
 
             // Upload Image to Local Path
             using var stream = new FileStream(localFilePath, FileMode.Create);

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NZWalks_ASP.NET_Core.Data;
@@ -68,7 +69,7 @@ builder.Services.AddIdentityCore<IdentityUser>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
-builder.Services.AddScoped<ImageRepository, LocalImageRepository>();
+builder.Services.AddScoped<IImageRepository, LocalImageRepository>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -127,6 +128,14 @@ app.UseAuthentication();
 // It checks whether the current user is authorized to access protected endpoints.
 // (Authentication middleware should be added before this if authentication is used.)
 app.UseAuthorization();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Images")
+    ),
+    RequestPath = "/Images"
+});
 
 // Maps incoming HTTP requests to the appropriate Controller actions
 // based on routing attributes such as [HttpGet], [HttpPost], etc.

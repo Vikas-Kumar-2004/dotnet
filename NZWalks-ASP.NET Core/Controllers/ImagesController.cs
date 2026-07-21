@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NZWalks_ASP.NET_Core.Models.Domain;
 using NZWalks_ASP.NET_Core.Models.DTO;
@@ -11,9 +11,9 @@ namespace NZWalks_ASP.NET_Core.Controllers
     [ApiController]
     public class ImagesController : ControllerBase
     {
-        private readonly ImageRepository imageRepository;
+        private readonly IImageRepository imageRepository;
 
-        public ImagesController(ImageRepository imageRepository)
+        public ImagesController(IImageRepository imageRepository)
         {
             this.imageRepository = imageRepository;
         }

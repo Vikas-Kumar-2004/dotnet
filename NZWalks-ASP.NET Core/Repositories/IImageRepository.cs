@@ -2,7 +2,7 @@
 
 namespace NZWalks_ASP.NET_Core.Repositories
 {
-    public interface ImageRepository
+    public interface IImageRepository
     {
         Task<Image> Upload(Image image);
     }
