@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi;
+using Microsoft.OpenApi.Models;
 using NZWalks_ASP.NET_Core.Data;
 using NZWalks_ASP.NET_Core.Repositories;
 using Scalar.AspNetCore;
@@ -19,38 +19,36 @@ var builder = WebApplication.CreateBuilder(args);
 // Registers MVC Controller services into the Dependency Injection (DI) container.
 // Required if your application uses Controllers to handle HTTP requests.
 builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
 
-// Configure native OpenAPI for JWT Bearer Token
-builder.Services.AddOpenApi(options =>
+// Configure Swashbuckle for JWT Bearer Token
+builder.Services.AddSwaggerGen(options =>
 {
-    options.AddDocumentTransformer((document, context, cancellationToken) =>
-    {
-        document.Components ??= new OpenApiComponents();
-        document.Components.SecuritySchemes.Add("Bearer", new OpenApiSecurityScheme
+    options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme,
+        new OpenApiSecurityScheme
         {
+            Name = "Authorization",
+            In = ParameterLocation.Header,
             Type = SecuritySchemeType.Http,
-            Scheme = "bearer",
+            Scheme = JwtBearerDefaults.AuthenticationScheme,
             BearerFormat = "JWT",
             Description = "Enter JWT Bearer token only."
         });
 
-        document.SecurityRequirements.Add(new OpenApiSecurityRequirement
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
         {
+            new OpenApiSecurityScheme
             {
-                new OpenApiSecurityScheme
+                Reference = new OpenApiReference
                 {
-                    Reference = new OpenApiReference
-                    {
-                        Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                    }
-                },
-                Array.Empty<string>()
-            }
-        });
-
-        return Task.CompletedTask;
+                    Type = ReferenceType.SecurityScheme,
+                    Id = JwtBearerDefaults.AuthenticationScheme
+                }
+            },
+            Array.Empty<string>()
+        }
     });
 });
 
@@ -70,6 +68,7 @@ builder.Services.AddIdentityCore<IdentityUser>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
+builder.Services.AddScoped<ImageRepository, LocalImageRepository>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -111,10 +110,11 @@ var app = builder.Build();
 // Checks if the application is running in the Development environment.
 if (app.Environment.IsDevelopment())
 {
-    // Exposes the OpenAPI specification endpoint.
-    // This allows tools like Swagger UI to display API documentation.
-    app.MapOpenApi();
-    app.MapScalarApiReference();
+    app.UseSwagger();
+    app.MapScalarApiReference(options =>
+    {
+        options.WithOpenApiRoutePattern("/swagger/v1/swagger.json");
+    });
 }
 
 // Redirects all HTTP requests to HTTPS automatically.
