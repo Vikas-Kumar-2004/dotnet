@@ -23,8 +23,7 @@ namespace NZWalks_ASP.NET_Core.Controllers
 
         // GET ALL  REGION (Get All Region )
         [HttpGet]
-
-
+        [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetAll()
         {
             // Get data from the database (Domain Models)
@@ -55,6 +54,8 @@ namespace NZWalks_ASP.NET_Core.Controllers
 
         [HttpGet]
         [Route("{id:guid}")]
+        [Authorize(Roles = "Reader")]
+
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             // Get the region from the database
@@ -81,6 +82,8 @@ namespace NZWalks_ASP.NET_Core.Controllers
         // POST: Create a New Region
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
+
         public async Task<IActionResult> Create([FromBody] AddRegionRequestDto addRegionRequestDto)
         {
 
@@ -118,6 +121,8 @@ namespace NZWalks_ASP.NET_Core.Controllers
 
         [HttpPut]
         [Route("{id:guid}")]
+        [Authorize(Roles = "Writer")]
+
         public async Task<IActionResult> Update(
             [FromRoute] Guid id,
             [FromBody] UpdateRegionRequestDto updateRegionRequestDto)
@@ -155,6 +160,8 @@ namespace NZWalks_ASP.NET_Core.Controllers
 
         [HttpDelete]
         [Route("{id:guid}")]
+        [Authorize(Roles = "Writer")]
+
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             // Find the region by Id

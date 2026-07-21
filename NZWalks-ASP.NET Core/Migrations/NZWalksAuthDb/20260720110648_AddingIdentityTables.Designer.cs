@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NZWalks_ASP.NET_Core.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NZWalks_ASP.NET_Core.Migrations.NZWalksAuthDb
 {
     [DbContext(typeof(NZWalksAuthDbContext))]
-    partial class NZWalksAuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260720110648_AddingIdentityTables")]
+    partial class AddingIdentityTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,22 +49,6 @@ namespace NZWalks_ASP.NET_Core.Migrations.NZWalksAuthDb
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "a71a55d6-99d7-4123-b4e0-1218ecb90e3e",
-                            ConcurrencyStamp = "a71a55d6-99d7-4123-b4e0-1218ecb90e3e",
-                            Name = "Reader",
-                            NormalizedName = "READER"
-                        },
-                        new
-                        {
-                            Id = "c309fa92-2123-47be-b397-a1c77adb502c",
-                            ConcurrencyStamp = "c309fa92-2123-47be-b397-a1c77adb502c",
-                            Name = "Writer",
-                            NormalizedName = "WRITER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Scalar.AspNetCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using NZWalks_ASP.NET_Core.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi;
+using NZWalks_ASP.NET_Core.Data;
+using NZWalks_ASP.NET_Core.Repositories;
+using Scalar.AspNetCore;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +20,39 @@ var builder = WebApplication.CreateBuilder(args);
 // Required if your application uses Controllers to handle HTTP requests.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+// Configure native OpenAPI for JWT Bearer Token
+builder.Services.AddOpenApi(options =>
+{
+    options.AddDocumentTransformer((document, context, cancellationToken) =>
+    {
+        document.Components ??= new OpenApiComponents();
+        document.Components.SecuritySchemes.Add("Bearer", new OpenApiSecurityScheme
+        {
+            Type = SecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT",
+            Description = "Enter JWT Bearer token only."
+        });
+
+        document.SecurityRequirements.Add(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                },
+                Array.Empty<string>()
+            }
+        });
+
+        return Task.CompletedTask;
+    });
+});
 
 // PostgreSQL Connection
 builder.Services.AddDbContext<NZWalksDbContext>(options =>
@@ -28,12 +63,25 @@ builder.Services.AddDbContext<NZWalksAuthDbContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("NZWalksAuthConnectionString")));
 
+builder.Services.AddIdentityCore<IdentityUser>()
+    .AddRoles<IdentityRole>()
+    .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("NZWalks")
+    .AddEntityFrameworkStores<NZWalksAuthDbContext>()
+    .AddDefaultTokenProviders();
 
+builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
-// Registers OpenAPI (Swagger) services.
-// This generates API documentation that describes all available endpoints.
-builder.Services.AddOpenApi();
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 1;
 
+});
+
+// Removed AddOpenApi here because it was configured above.
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -66,7 +114,6 @@ if (app.Environment.IsDevelopment())
     // Exposes the OpenAPI specification endpoint.
     // This allows tools like Swagger UI to display API documentation.
     app.MapOpenApi();
-    app.UseSwagger();
     app.MapScalarApiReference();
 }
 
