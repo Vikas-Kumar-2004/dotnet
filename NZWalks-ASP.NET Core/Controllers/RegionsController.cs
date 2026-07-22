@@ -5,6 +5,7 @@ using NZWalks_ASP.NET_Core.Models.Domain;
 using NZWalks_ASP.NET_Core.Models.DTO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.Json;
 
 namespace NZWalks_ASP.NET_Core.Controllers
 {
@@ -15,10 +16,12 @@ namespace NZWalks_ASP.NET_Core.Controllers
     public class RegionsController : ControllerBase
     {
         private readonly NZWalksDbContext dbContext;
+        private readonly ILogger<RegionsController> logger;
 
-        public RegionsController(NZWalksDbContext dbContext)
+        public RegionsController(NZWalksDbContext dbContext, ILogger<RegionsController> logger)
         {
             this.dbContext = dbContext;
+            this.logger = logger;
         }
 
         // GET ALL  REGION (Get All Region )
@@ -26,6 +29,9 @@ namespace NZWalks_ASP.NET_Core.Controllers
         [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetAll()
         {
+
+            logger.LogInformation("Get All Region Action Method was Invoked ");
+
             // Get data from the database (Domain Models)
             var regionsDomain = await dbContext.Regions.ToListAsync(); // With Entity Framework
 
@@ -45,6 +51,8 @@ namespace NZWalks_ASP.NET_Core.Controllers
                     RegionImageUrl = region.RegionImageUrl
                 });
             }
+
+            //logger.LogInformation($"Finished Get All Region request with data :{JsonSerializer.Serialize{regionsDomai}");
 
             return Ok(regionsDto);
         }

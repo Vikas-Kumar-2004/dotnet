@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using NZWalks_ASP.NET_Core.Data;
 using NZWalks_ASP.NET_Core.Repositories;
 using Scalar.AspNetCore;
+using Serilog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Creates a WebApplicationBuilder.
 // It initializes the application, loads configuration,
 // sets up dependency injection (DI), logging, and other services.
+var logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .MinimumLevel.Information()
+    .CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
+
 
 // Registers MVC Controller services into the Dependency Injection (DI) container.
 // Required if your application uses Controllers to handle HTTP requests.
