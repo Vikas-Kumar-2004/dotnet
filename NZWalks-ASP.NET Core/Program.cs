@@ -11,6 +11,7 @@ using NZWalks_ASP.NET_Core.Repositories;
 using Scalar.AspNetCore;
 using Serilog;
 using System.Text;
+using NZWalks_ASP.NET_Core.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -111,9 +112,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+// Register Global Exception Handler
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 // Builds the application.
 // After this point, all registered services are ready to be used.
 var app = builder.Build();
+
+// Add Exception Handler Middleware early in the pipeline
+app.UseExceptionHandler();
 
 // Configure the HTTP request pipeline.
 
